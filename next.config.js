@@ -4,6 +4,13 @@ const withTM = require('next-transpile-modules')(['three'])
 
 const nextConfig = {
   reactStrictMode: true,
+   typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
 }
 
 module.exports = withTM(nextConfig)
