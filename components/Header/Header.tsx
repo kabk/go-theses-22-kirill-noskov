@@ -108,7 +108,7 @@ const Header = () => {
         activeJobs.find((item) => item.isActive === true) ? 'In Progress' : 'No active jobs'
     }
         </Paragraph></Box>
-    const Mining = <Flex direction='row' gap='4' ai='center'>{MiningText}{MiningStatus}</Flex>
+    const Mining = <Flex direction='row' gap={{'@initial': '4', '@bp1':'2'}} ai='center'>{MiningText}{MiningStatus}</Flex>
 
     const PauseJob = (jobName:string) => {
         setActiveJobs(activeJobs.map(j => j.id === jobName ? { ...j, isActive: false } : j))
