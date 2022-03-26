@@ -29,22 +29,28 @@ const Terminal = () => {
           }
     });
     return(
-        // <Portal.Root>
-            <Box 
-            width={'12'}
-            height={'fit'}
-            css={{zIndex:10000000}}
+            <Box
+            width={{'@initial':'24', '@bp1':'full'}}
+            position='fixed'
+            bottom={4}
             px='2'
-            py='1'
+            height={'fit'}
+            css={{zIndex:10000000, left:'50%',
+            // outline:'5px solid $foregroundTerciary',
+            transform:'translateX(-50%)'}}
+            >
+            <Box 
+
+            px='2'
+            py='2'
             borderRadius={'medium'}
             bc='foregroundSecondary'
-            // position='fixed'
-            // right='2'
-            // bottom='2'
             >
                 <Box width='full'>
                     <Flex direction='row' jc='spaceBetween'  ai='center'>
-                    <Paragraph color='textForeground'>
+                    <Paragraph 
+                    size={"7"}
+                    color='textForeground'>
                     TERMINAL
                     </Paragraph>
                     <Button 
@@ -66,7 +72,7 @@ const Terminal = () => {
                     height='full' css={{overflow:'scroll'}}>
                         <Flex direction='column' gap='1'>
                             {value.length === 0 && (
-                                  <Paragraph color='text'>
+                                  <Paragraph size={'7'} color='text'>
                                  Nothing here yet
                               </Paragraph>
                             )}
@@ -94,6 +100,7 @@ const Terminal = () => {
                         </Flex>
                     </Box>
                 )}
+            </Box>
             </Box>
         // </Portal.Root>
     )

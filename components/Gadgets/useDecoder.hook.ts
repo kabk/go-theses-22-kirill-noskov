@@ -28,7 +28,7 @@ const useDecoder = (jobName: string) => {
     }
 
     const resumeJob = (job: string) => {
-        setActiveJobs(activeJobs.map(j => j.id === job ? { ...j, isActive: true } : j))
+        setActiveJobs(activeJobs.map(j => j.id === job ? { ...j, isActive: true, isActivated:true } : j))
     }
 
     const pauseJob = (job: string) => {

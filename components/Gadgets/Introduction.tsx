@@ -12,10 +12,11 @@ interface IIntroduction {
 const Introduction = ({start, pause, strategy, change, isActive}:IIntroduction) => {
     return (
         <Box borderRadius='medium'
-            p='2'
+            py='4'
+            px='3'
             bc='foreground'
         >
-            <Flex direction='column' gap='2'>
+            <Flex direction='column' gap='3'>
                 <Paragraph color='textForeground'>
                     You&apos;ve stumbled upon your first artifact&thinsp;—&thinsp;to reveal it you have to perform a calculation to obtain a proof. Once the calculation is complete&thinsp;—&thinsp;you can exchange your proof for an unique NFT on Ethereum blockchain. There are only 14 of them for each artifact.
                 </Paragraph>

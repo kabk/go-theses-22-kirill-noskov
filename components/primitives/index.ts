@@ -7,15 +7,18 @@ import Paragraph from '@/design-system/primitives/Paragraph';
 import Text from '@/design-system/primitives/Text';
 import Tag from '@/design-system/primitives/Tag';
 import * as Dialog from '@/design-system/primitives/Dialog'
-
+import * as Progress from '@/design-system/primitives/Progress'
+import MotionBox from '@/design-system/primitives/MotionBox';
 export {
     Bleed,
     Box,
+    MotionBox,
     Button,
     Flex,
     Heading,
     Paragraph,
     Text,
     Tag,
-    Dialog
+    Dialog,
+    Progress
 }

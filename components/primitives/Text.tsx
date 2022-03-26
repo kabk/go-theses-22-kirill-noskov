@@ -5,7 +5,7 @@ const Text = styled('span', {
     // Reset
     lineHeight: '1',
     margin: '0',
-    fontWeight: 400,
+    fontWeight: 100,
     display: 'block',
     variants: {
         weight: getVariant('fontWeights', (tokenValue) => ({

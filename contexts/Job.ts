@@ -17,7 +17,9 @@ type FPS = number | null;
 export type Job = {
     id: string;
     isActive: boolean;
+    isActivated: boolean;
     isComplete: boolean;
+    resolution: [number, number];
     strategy: StrategyType;
     proof?: any;
     fps?: FPS;
@@ -31,7 +33,9 @@ type StrategyType = 'default' | 'all'
 const defaultJobValue = {
     id: "script",
     isActive: false,
+    isActivated: false,
     isComplete: false,
+    resolution:[24,24],
     strategy: "default" as StrategyType,
     proof: undefined,
     lastValue: defaultValue,

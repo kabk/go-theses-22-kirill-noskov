@@ -1,17 +1,43 @@
-import { styled } from 'stitches.config'
-import { Paragraph, Text, Box, Flex, Bleed, Button } from '@/design-system/primitives'
-import { Terminal } from '@/design-system/Gadgets'
+import { styled, keyframes } from 'stitches.config'
+import { Paragraph, Text, Box, Flex, Bleed, Button, Progress, MotionBox } from '@/design-system/primitives'
+import IconPlay from '@/design-system/icons/Play'
+import IconPause from '@/design-system/icons/Pause'
 
 import { useBlockNumber } from 'wagmi'
 import useHardwareDetails from './useHardwareDetails.hook'
 import { useRecoilState } from 'recoil'
+import { useState, useEffect } from 'react'
+import useScrollPosition from '@react-hook/window-scroll'
+
 //state
 import { jobs } from 'contexts'
 
+const clamp = (num:number, min:number, max:number) => {
+  return num <= min 
+    ? min 
+    : num >= max 
+      ? max 
+      : num
+}
+
+const orbAnimation = keyframes({
+    '0%': {
+        transform: 'scale(0.85)',
+    },
+    '100%': {
+        transform: 'rotate(1)',
+    },
+})
+    
+
 const StyledMiningStatus = styled('div', {
-    width: '$4',
-    height: '$4',
+    width: '$3',
+    height: '$3',
     borderRadius: '$round',
+    animation: `${orbAnimation} 3s linear infinite`,
+    animationFillMode: 'both',
+    animationDirection: 'alternate',
+    animationTimingFunction: 'cubic-bezier(0.1, 0.7, 1.2, 0.1)',
     variants: {
         active: {
             true: {
@@ -30,7 +56,7 @@ const StyledMiningStatus = styled('div', {
         active: false
     }
 })
-
+ 
 
 const Header = () => {
 
@@ -42,18 +68,47 @@ const Header = () => {
     const details = useHardwareDetails()
 
 
+    const [isPinnedList, setIsPinnedList] = useState(false)
+    const [scrollDir, setScrollDir] = useState<'top' | 'bottom' | 'stale'>('stale')
+    const scrollY = useScrollPosition(8) //framerate scroll check
+    const [prevScroll, setPrevScroll] = useState(0)
+
+
+    useEffect(() => {
+        const currentScroll = scrollY
+        if (currentScroll >= Math.floor(window.innerHeight / 3) && scrollDir === 'bottom') {
+            setIsPinnedList(false)
+        }
+        if (currentScroll <= 200) {
+            setIsPinnedList(true)
+            return
+        }
+        if ((prevScroll - currentScroll) > 130 && scrollDir !== 'top') {
+            setScrollDir('top')
+        }
+        if ((prevScroll - currentScroll) > 130 && scrollDir === 'top') {
+            setIsPinnedList(true)
+        }
+        if ((currentScroll - prevScroll) > 70 && scrollDir !== 'bottom') {
+            setScrollDir('bottom')
+        }
+        setPrevScroll(scrollY)
+
+    }, [scrollY, scrollDir, prevScroll])
+
+
     const BlockStatus = <Box></Box>
-    const BlockText = <Box><Paragraph color='text'>Block</Paragraph><Paragraph color='textForeground'>{dataBlock || '0000000'}</Paragraph></Box>
+    const BlockText = <Box><Paragraph size={'7'} color='text'>Block</Paragraph><Paragraph size={'7'} color='textForeground'>{dataBlock || '0000000'}</Paragraph></Box>
     const Block = <Flex direction='row' gap='2'>{BlockText}{BlockStatus}</Flex>
 
     const MiningStatus = <StyledMiningStatus active={
         activeJobs.find((item) => item.isActive === true) ? true : false
     } />
-    const MiningText = <Box><Paragraph color='text'>Mining</Paragraph><Paragraph color='textForeground'>{
+    const MiningText = <Box><Paragraph size={'7'} color='text'>Mining</Paragraph><Paragraph size={'7'} color='textForeground'>{
         activeJobs.find((item) => item.isActive === true) ? 'In Progress' : 'No active jobs'
     }
         </Paragraph></Box>
-    const Mining = <Flex direction='row' gap='2' ai='center'>{MiningText}{MiningStatus}</Flex>
+    const Mining = <Flex direction='row' gap='4' ai='center'>{MiningText}{MiningStatus}</Flex>
 
     const PauseJob = (jobName:string) => {
         setActiveJobs(activeJobs.map(j => j.id === jobName ? { ...j, isActive: false } : j))
@@ -63,68 +118,138 @@ const Header = () => {
         setActiveJobs(activeJobs.map(j => j.id === jobName ? { ...j, isActive: true } : j))
     }
 
+    const variants = {
+        visible: (i:number) => ({
+          opacity: 1,
+          y:0,
+          transition: {
+            delay: i * 0.3,
+          },
+        }),
+        transform: (i:number) => ({
+            opacity: 1,
+            y:'-100%',
+            zIndex:1000,
+            transition: {
+              delay: i * 0.3,
+            },
+          }),
+        hidden: { opacity: 0,  y: '-120px' },
+      }
     return (
-        <Box as='header'
-            zIndex='100'
+        <Box
+        as='header'
+        zIndex='100'
+        position='sticky'
+    
+        overflow={true}
+        top='0'
+        width='full'
+        height='fit'
+        >
+    <Flex direction='column'>
+        <Box
             bc='foregroundTranslucent'
-            position='sticky'
+            css={{
+                transform:!isPinnedList ? 'translateY(-100%)':'translateY(0)',
+                transition: 'transform 0.3s ease-in-out',
+            }}
+        
             backdropFilter='blur'
+            overflow={true}
             top='0'
-            pt='2'
+            py='2'
             px='4'
             width='full'
             height='fit'>
-            <Flex direction='column' gap='2' jc='start'>
             <Flex direction='row' gap='4' ai='start' jc='spaceBetween'>
                 <Flex direction='row' gap='4' ai='center'>
                     {Block}
                     {Mining}
                 </Flex>
-               <Terminal/>
+                <Flex direction='row' gap='3' ai='center'>
+                <Paragraph
+                css={{'@bp1':{display:'none', '@initial':{display:'inline'}}}}
+                size='7' color='textForeground'>
+                github.com/&thinsp;kabk/&thinsp;gd2022<br/>
+                Coded Thesis 
+                </Paragraph>
+                <Box as='hr'
+                bc={'textForeground'}
+                css={{width:'1px', height:'$4', opacity:0.55, '@bp1':{display:'none', '@initial':{display:'inline'}}}}
+                />
+                <Paragraph size='7' color='textForeground'>
+                Royal Academy of Art<br/>
+                GD 2022
+                </Paragraph>
+              
+             
+                </Flex>
+       
             </Flex> 
-            {activeJobs.length > 0 && (
-                <Bleed>
-                    {activeJobs.map((job) => {
+        </Box>
+        {activeJobs.length > 0 && (
+            
+                    <MotionBox    overflow={true}>
+                    {activeJobs.filter(i => i.isActivated).map((job, i:number) => {
                         // if(!job.isActive){
-                         return(<Box width='full'
+                        const progress = clamp(((job?.publicSignals?.filter((i)=>i !== "0") || []).length / (job?.publicSignals?.length || 1)) * 100, 5, 100)
+                         return(<MotionBox width='full'
+                         animate={!isPinnedList ? 'transform' : 'visible'}
+                         custom={i}
+                         initial={{opacity:0, y:'-120px'}}
+                         position='relative'
+                         variants={variants}
+                        overflow={true}
                          key={job.id + 'controller'} 
                          px='4'
-                         py='1'
+                         py='2'
                          bc='foregroundSecondary'
                          >
-                             <Flex direction='row' gap='2' ai='center' jc='spaceBetween'>
-                             <Flex direction='row' gap='2' ai='center'>
-                                <Text 
-                                // size='3'
-                                color='textForeground'>
-                                    {job.id.slice(0,1).toUpperCase() + job.id.slice(1)}
-                                </Text>
-                                {job.strategy}
-                                FPS: {job.fps}
-                            </Flex>
+                          
+                            <Flex direction='row' gap='2' ai='center' jc='spaceBetween'>
+                                <Box 
+                                style={{ width: `${progress}%` }}
+                                >
+                                    <Flex direction='row' gap='2' ai='center' jc='end'>
+                                        <Text 
+                                        size='p'
+                                        color='textForeground'>
+                                            {job.id.slice(0,1).toUpperCase() + job.id.slice(1)}
+                                        </Text>
+                                    </Flex>
+                                </Box>
  
-                             <Flex direction='row' gap='2' ai='center'>
-                                <Button
-                                  onClick={()=>{
-                                        if(job.isActive){
-                                            PauseJob(job.id)
-                                        }else{
-                                            ResumeJob(job.id)
-                                        }
-                                    }}
-                                >{!job.isActive ? 'Play' : 'Pause'}</Button>
-                                {((job?.publicSignals?.filter((i)=>i !== "0") || []).length / (job?.publicSignals?.length || 1)) * 100} %
+                                <Flex direction='row' gap='2' ai='center'>
+                                    {job.strategy}
+                                    FPS: {job.fps}
+                                        <Button
+                                        padding='small'
+                                        shape='square'
+                                        onClick={()=>{
+                                                if(job.isActive){
+                                                    PauseJob(job.id)
+                                                }else{
+                                                    ResumeJob(job.id)
+                                                }
+                                            }}
+                                        >{!job.isActive ? <IconPlay/> : <IconPause/>}
+                                        </Button>
+                                </Flex>
                              </Flex>
-                             </Flex>
-                         </Box>)
-                        // } else 
-                        // return 
+                            <Bleed>
+                             <Progress.Root>
+                                    <Progress.Indicator style={{ width: `${progress}%` }}/>                                  
+                             </Progress.Root>
+                             </Bleed>
+                         </MotionBox>)
+                        
+                  
 })}
-                   
-                </Bleed>
+                    </MotionBox>
+              
             )}
             </Flex>
-
         </Box>
     )
 }

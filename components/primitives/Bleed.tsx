@@ -4,7 +4,10 @@ const Bleed = styled('div', {
     variants: {
         type: {
             default: {
-                margin: '0 -$4'
+                margin: '0 -$4',
+                '@bp1':{
+                    margin: '0',
+                }
             },
         }
     },

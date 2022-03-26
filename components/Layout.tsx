@@ -6,6 +6,7 @@ import Header from '@/design-system/Header'
 //state
 import React from 'react'
 import Script from 'next/script'
+import { Terminal } from '@/design-system/Gadgets'
 
 //types
 import type { ReactNode } from 'react'
@@ -26,6 +27,7 @@ const StyledContainer = styled('div', {
 const StyledMain = styled('main', {
     position: 'relative',
     height: '100%',
+    overflow: 'hidden',
     minHeight: '100vh',
     boxSizing: 'border-box',
     padding: '$4',
@@ -76,7 +78,7 @@ const Layout = ({ children, title = 'Floating interfaces' }: Props) => {
             <Header />
 
             <StyledMain>
-             
+                <Terminal/>
                 {children}
                 {/* <StyledBackground /> */}
             </StyledMain>

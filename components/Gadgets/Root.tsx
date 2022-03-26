@@ -33,11 +33,13 @@ const Root = ({jobName, index, quantity, name, description}:IRoot) => {
     }
 
     return(
-        <Box py='4'>
-            <Flex direction='column' gap='2'>
+        <Box 
+        mt='4'
+        py='4'>
+            <Flex direction='column' gap='4'>
             <Box>
-                <Flex direction='column' gap='2'>
-                    <Flex direction='row' gap='1'>
+                <Flex direction='column' gap='3'>
+                    <Flex direction='row' gap='2'>
                         <Heading color='text' size='3'>
                             Artifact {index}
                         </Heading>
@@ -47,7 +49,7 @@ const Root = ({jobName, index, quantity, name, description}:IRoot) => {
                             {name}
                         </Heading>
                     </Flex>
-                    <Flex direction='row' gap='1'>
+                    <Flex direction='row' gap='2'>
                         <Paragraph color='text'>
                             {quantity}/14 minted
                         </Paragraph>
