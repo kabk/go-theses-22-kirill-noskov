@@ -50,9 +50,8 @@ const Decoder = ({value}:IDecoder) => {
     },[])
 
     return (
-        <Bleed type='default'>
+        <Bleed type='default' adjust>
             <Box position={'relative'}
-
              overflow={true}>
                 <Box overflow={true} css={{ position: 'relative', zIndex: 10 }}>
                     <Body>
@@ -61,8 +60,8 @@ const Decoder = ({value}:IDecoder) => {
                             ref={container}
                             borderRadius={'medium'}
                             css={{
-                                background: 'linear-gradient(180deg, #161616 0%, rgba(0, 0, 0, 0) 100%), #000000',
-                                boxShadow: '0px -9px 25px 2px rgba(190, 190, 190, 0.13), inset 0px 1px 1px rgba(255, 255, 255, 0.6), inset 0px 2px 3px 1px rgba(255, 255, 255, 0.25)'
+                                background: 'linear-gradient(180deg, #161616 0%, rgba(0, 0, 0, 0) 100%), #3A3A3A;',
+                                boxShadow: 'inset 0px 2px 4px rgba(242, 242, 242, 0.6), inset 0px 2px 8px 5px #697177;'
                             }}
                         >
                             <Flex ai='center' jc='center'>

@@ -17,7 +17,9 @@ const Introduction = ({start, pause, strategy, change, isActive}:IIntroduction) 
             bc='foreground'
         >
             <Flex direction='column' gap='3'>
-                <Paragraph color='textForeground'>
+                <Paragraph color='textForeground'
+              
+                >
                     You&apos;ve stumbled upon your first artifact&thinsp;—&thinsp;to reveal it you have to perform a calculation to obtain a proof. Once the calculation is complete&thinsp;—&thinsp;you can exchange your proof for an unique NFT on Ethereum blockchain. There are only 14 of them for each artifact.
                 </Paragraph>
                 <Flex direction='row' gap='2' jc='spaceBetween'>
@@ -31,7 +33,7 @@ const Introduction = ({start, pause, strategy, change, isActive}:IIntroduction) 
                     {isActive ? 'Pause mining' : 'Start mining'}
                 </Button>
                 <Flex direction='row' gap='1' jc='start'>
-                <Button
+                {/* <Button
                 padding='small'
                 disabled={strategy === 'default' ? true : false}
                 onClick={()=>change('default')}>
@@ -42,7 +44,7 @@ const Introduction = ({start, pause, strategy, change, isActive}:IIntroduction) 
                     disabled={strategy === 'all' ? true : false}
                 onClick={()=>change('all')}>
                     all 
-                </Button>
+                </Button> */}
 
                 </Flex>
                 </Flex>

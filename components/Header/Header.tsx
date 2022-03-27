@@ -123,15 +123,16 @@ const Header = () => {
           opacity: 1,
           y:0,
           transition: {
-            delay: i * 0.3,
+            delay: 0.3,
           },
         }),
         transform: (i:number) => ({
             opacity: 1,
-            y:'-100%',
+            y:'-54px',
             zIndex:1000,
             transition: {
               delay: i * 0.3,
+              ease: 'anticipate',
             },
           }),
         hidden: { opacity: 0,  y: '-120px' },
@@ -193,6 +194,30 @@ const Header = () => {
                     <MotionBox    overflow={true}>
                     {activeJobs.filter(i => i.isActivated).map((job, i:number) => {
                         // if(!job.isActive){
+
+                        const rightSide =   
+                        <Flex direction='row' gap='2' ai='center'>
+                        {/* {job.strategy} */}
+                            <Paragraph size='7'>{job.fps}</Paragraph> 
+                            <Button
+                            padding='small'
+                            shape='square'
+                            onClick={()=>{
+                                    if(job.isActive){
+                                        PauseJob(job.id)
+                                    }else{
+                                        ResumeJob(job.id)
+                                    }
+                                }}
+                            >{!job.isActive ? <Box 
+                            height='2'
+                            width='2'
+                            position='relative' css={{right:'-1px'}}><IconPlay/></Box> : <IconPause/>}
+                            </Button>
+                    </Flex>
+                   
+
+
                         const progress = clamp(((job?.publicSignals?.filter((i)=>i !== "0") || []).length / (job?.publicSignals?.length || 1)) * 100, 5, 100)
                          return(<MotionBox width='full'
                          animate={!isPinnedList ? 'transform' : 'visible'}
@@ -203,11 +228,13 @@ const Header = () => {
                         overflow={true}
                          key={job.id + 'controller'} 
                          px='4'
-                         py='2'
+                         pt='2'
+                        css={{
+                            borderBottom:'1px solid rgba(0,0,0,0.2)',
+                        }}
                          bc='foregroundSecondary'
                          >
-                          
-                            <Flex direction='row' gap='2' ai='center' jc='spaceBetween'>
+                             
                                 <Box 
                                 style={{ width: `${progress}%` }}
                                 >
@@ -219,29 +246,20 @@ const Header = () => {
                                         </Text>
                                     </Flex>
                                 </Box>
- 
-                                <Flex direction='row' gap='2' ai='center'>
-                                    {job.strategy}
-                                    FPS: {job.fps}
-                                        <Button
-                                        padding='small'
-                                        shape='square'
-                                        onClick={()=>{
-                                                if(job.isActive){
-                                                    PauseJob(job.id)
-                                                }else{
-                                                    ResumeJob(job.id)
-                                                }
-                                            }}
-                                        >{!job.isActive ? <IconPlay/> : <IconPause/>}
-                                        </Button>
-                                </Flex>
-                             </Flex>
-                            <Bleed>
-                             <Progress.Root>
-                                    <Progress.Indicator style={{ width: `${progress}%` }}/>                                  
-                             </Progress.Root>
-                             </Bleed>
+                                <Bleed>
+                                    <Progress.Root>
+                                            <Progress.Indicator style={{ width: `${progress}%` }}/>                                  
+                                    </Progress.Root>
+                                 </Bleed>
+                                
+                                <Box position='absolute'
+                                px='4'
+                                css={{display:'flex', ai:'center', jc:'end'}}
+                                height='full' width='full' right={0} top={0}>
+                                  {rightSide}
+                                </Box>
+                         
+                             
                          </MotionBox>)
                         
                   

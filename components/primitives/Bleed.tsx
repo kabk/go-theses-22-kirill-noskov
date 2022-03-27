@@ -6,9 +6,16 @@ const Bleed = styled('div', {
             default: {
                 margin: '0 -$4',
                 '@bp1':{
-                    margin: '0',
+                    margin: '0 -$4',
                 }
             },
+        },
+        adjust:{
+            true:{
+                '@bp1':{
+                    margin: '0',
+                }
+            }
         }
     },
     defaultVariants: {

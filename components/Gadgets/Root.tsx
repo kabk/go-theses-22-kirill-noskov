@@ -66,9 +66,18 @@ const Root = ({jobName, index, quantity, name, description}:IRoot) => {
             strategy={ activeJobs.find((item) => item.id === jobName)?.strategy || 'default'}
             change={ChangeStrategy}
             />
+            <Box position='relative' overflow>
+            <Box position='absolute' left='0' top='0'
+            
+            >
+
+            </Box>
+           
             <Decoder
             value={ activeJobs.find((item) => item.id === jobName)}
             />
+         
+             </Box>
             </Flex>
         </Box>
     )

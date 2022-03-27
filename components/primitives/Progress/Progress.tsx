@@ -1,9 +1,20 @@
 import * as Progress from '@radix-ui/react-progress';
-import { styled } from 'stitches.config';
+import { styled, keyframes } from 'stitches.config';
+
+const animationwidth = keyframes({
+  '0%': { width: 'calc(95%)' },
+  '100%': { width: '100%'}  
+})
+
 
 const StyledProgress = styled(Progress.Root, {
     background: 'transparent',
     width: '100%',
+    animation: `${animationwidth} 2s linear infinite`,
+    animationFillMode : 'both',
+    animationDirection: 'alternate',
+    animationTimingFunction: 'cubic-bezier(0.1, 0.7, 1.2, 0.1)',
+    animationDelay: '2.5s',
     // position: 'absolute',
     // bottom:'-4px',
     marginTop:'$2',

@@ -30,24 +30,48 @@ export type Job = {
 
 type StrategyType = 'default' | 'all'
 
-const defaultJobValue = {
-    id: "script",
-    isActive: false,
-    isActivated: false,
-    isComplete: false,
-    resolution:[24,24],
-    strategy: "default" as StrategyType,
-    proof: undefined,
-    lastValue: defaultValue,
-    prevValue: defaultValue,
-    publicSignals: undefined,
-} as Job;
+class defaultJobClass {
+    constructor (
+        public id: string,
+        public isActive: boolean,
+        public isActivated: boolean,
+        public isComplete: boolean,
+        public resolution: [number, number],
+        public strategy: StrategyType,
+        public lastValue: DefaultValueType,
+        public prevValue: DefaultValueType,
+        public proof?: any,
+        public fps?: FPS,
+        public publicSignals?: DefaultReturnType
+    ) {
+        this.id = id;
+        this.isActive = isActive;
+        this.isActivated = isActivated;
+        this.isComplete = isComplete;
+        this.resolution = resolution;
+        this.strategy = strategy;
+        this.proof = proof;
+        this.fps = fps;
+        this.lastValue = lastValue;
+        this.prevValue = prevValue;
+        this.publicSignals = publicSignals;
+    }
+
+}
+
+
+
+const script:Job = new defaultJobClass('script', false, false, false, [24,24], 'default', defaultValue, defaultValue, undefined, undefined, undefined);
+const stone:Job = new defaultJobClass('stone', false, false, false, [24,24], 'default', defaultValue, defaultValue, undefined, undefined, undefined);
+const clay:Job = new defaultJobClass('clay', false, false, false, [24,24], 'default', defaultValue, defaultValue, undefined, undefined, undefined);
+const parchment:Job = new defaultJobClass('parchment', false, false, false, [24,24], 'default', defaultValue, defaultValue, undefined, undefined, undefined);
+const seal:Job = new defaultJobClass('seal', false, false, false, [24,24], 'default', defaultValue, defaultValue, undefined, undefined, undefined);
 
 
 
 export const jobs = atom({
     key: "jobs",
-    default: [defaultJobValue] as Job[],
+    default: [script, stone, clay, parchment, seal] as Job[],
     effects: [persistAtom] as AtomEffect<Job[]>[]
 })
 

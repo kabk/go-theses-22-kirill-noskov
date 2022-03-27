@@ -7,8 +7,10 @@ const Body = ({ children }: { children: React.ReactNode | React.ReactNode[] }) =
         px={{'@initial':0, '@bp1':2}}
         >
             <Flex ai='center' jc='center'>
-                <Box width='28' css={{ wordBreak: 'break-word', hyphens: 'auto' }}>
-                    <Flex direction='column' gap='2'>
+                <Box width='28' 
+                
+                css={{ wordBreak: 'break-word', hyphens: 'auto' }}>
+                    <Flex direction='column' gap='4'>
                         {children}
                     </Flex>
                 </Box>

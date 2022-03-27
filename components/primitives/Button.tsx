@@ -10,10 +10,10 @@ const StyledButton = styled("button", {
     variants: {
         padding:{
             big:{
-                padding: "calc($1 * 0.5) $4",
+                padding: "calc($2 * 0.5) $4",
             },
             small:{
-                padding: "calc($1 * 0.5) $2",
+                padding: "$1 $2",
             }
         },
         width: getVariant('sizes', (tokenValue) => ({
@@ -82,7 +82,7 @@ const StyledButton = styled("button", {
         shape: {
             square: {
                 aspectRatio: "1/1",
-                padding:'$1',
+                padding:'$2',
                 alignItems:'center',
                 flexDirection:'row',
                 display:'flex',

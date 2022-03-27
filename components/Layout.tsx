@@ -27,7 +27,7 @@ const StyledContainer = styled('div', {
 const StyledMain = styled('main', {
     position: 'relative',
     height: '100%',
-    overflow: 'hidden',
+    overflow: 'true',
     minHeight: '100vh',
     boxSizing: 'border-box',
     padding: '$4',
