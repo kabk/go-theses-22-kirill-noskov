@@ -105,7 +105,7 @@ const Header = () => {
         activeJobs.find((item) => item.isActive === true) ? true : false
     } />
     const MiningText = <Box><Paragraph size={'7'} color='text'>Mining</Paragraph><Paragraph size={'7'} color='textForeground'>{
-        activeJobs.find((item) => item.isActive === true) ? 'In Progress' : 'No active jobs'
+        activeJobs.find((item) => item.isActive === true) ? 'In Progress' : 'Not active'
     }
         </Paragraph></Box>
     const Mining = <Flex direction='row' gap={{'@initial': '4', '@bp1':'2'}} ai='center'>{MiningText}{MiningStatus}</Flex>

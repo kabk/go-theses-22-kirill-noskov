@@ -70,7 +70,10 @@ const StyledButton = styled("button", {
 
                 },
                 "&:hover": {
-                    outline:'5px solid $foregroundSecondary'
+                    outline:'5px solid $foregroundSecondary',
+                    '@bp1':{
+                        outline:'0px solid transparent',
+                    }
                 },
                 "&:disabled": {
                 },
