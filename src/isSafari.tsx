@@ -1,5 +1,9 @@
 const isSafari = ():boolean => {
-    return (navigator.vendor.match(/apple/i) || "").length > 0
+    if(typeof navigator !== 'undefined'){
+        return (navigator.vendor.match(/apple/i) || "").length > 0
+    } else {
+        return false
+    }
   }
 
   export default isSafari
