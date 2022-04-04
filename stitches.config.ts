@@ -320,7 +320,7 @@ export const globalStyles = globalCss({
     '#root, #__next': {
         isolation: 'isolate'
     },
-    "body": { background: '$background' },
+    "body": { background: '$background', lineHeight: '$p' },
     "body, html, #__next": { minHeight: "100%", height: "100%" },
     h1: { fontSize: "$1", fontFamily: 'Monument, Helvetica, Arial, sans-serif', },
     h2: { fontSize: "$2", fontFamily: 'Monument, Helvetica, Arial, sans-serif', },
