@@ -17,8 +17,8 @@ module.exports = withMDX({
   typescript:{
     ignoreBuildErrors: true,
   },
-  basePath: !debug ? '/thesisweb' : '',
-  assetPrefix: !debug ? '/thesisweb' : '',
+  basePath: !debug ? '/go-theses-22-kirill-noskov' : '',
+  assetPrefix: !debug ? '/go-theses-22-kirill-noskov' : '',
   // Append the default value with md extensions
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 })

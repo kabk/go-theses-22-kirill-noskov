@@ -71,8 +71,8 @@ const Layout = ({ children, title = 'Floating interfaces' }: Props) => {
 
             <Head>
                 <title>{title}</title>
-                <meta name="description" content="Mirror.xyz curation feed" />
-                <link rel="icon" href="/favicon.ico" />
+                <meta name="description" content=" Modeling an approach for the interface design in the new era of decentralized internetMirror.xyz curation feed" />
+                <link rel="icon" href="/go-theses-22-kirill-noskov/favicon.ico" />
             </Head>
 
             <Header />

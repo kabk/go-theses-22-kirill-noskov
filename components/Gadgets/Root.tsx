@@ -63,6 +63,7 @@ const Root = ({jobName, index, quantity, name, description}:IRoot) => {
             </Box>
             <Box px={3}>
             <Introduction
+            index={index}
             isActive={ activeJobs.find((item) => item.id === jobName)?.isActive || false}
             start={StartJob}
             pause={PauseJob}

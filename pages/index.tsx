@@ -11,7 +11,7 @@ const ResponsiveImage = (props) => (
   height='100%'
   width='100%'
   style={{mixBlendMode:'multiply', backdropFilter:'opacity(0.55)'}}
-  src={'/thesisweb/' + props.src} />
+  src={'/go-theses-22-kirill-noskov/' + props.src} />
   
  </Box>
 ) 
