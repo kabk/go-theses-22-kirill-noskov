@@ -229,7 +229,9 @@ const Header = () => {
                          key={job.id + 'controller'} 
                          px='4'
                          pt='2'
+                         //@ts-ignore
                         css={{
+                            opacity:0.55,
                             borderBottom:'1px solid rgba(0,0,0,0.2)',
                         }}
                          bc='foregroundSecondary'

@@ -34,10 +34,12 @@ const Root = ({jobName, index, quantity, name, description}:IRoot) => {
 
     return(
         <Box 
-        mt='4'
+        mt='6'
+        mb='6'
         py='4'>
-            <Flex direction='column' gap='4'>
-            <Box>
+            <Flex direction='row' gap='4' css={{'@bp1':{flexDirection:'column'},'@bp2':{flexDirection:'column'}, '@bp3':{flexDirection:'row'}}}>
+            <Flex direction='column' gap='4' css={{'@bp3':{order:2},'@bp2':{order:0}, '@bp1':{order:0}}}>
+            <Box px={3}>
                 <Flex direction='column' gap='3'>
                     <Flex direction='row' gap='2'>
                         <Heading color='text' size='3'>
@@ -59,6 +61,7 @@ const Root = ({jobName, index, quantity, name, description}:IRoot) => {
                     </Flex>
                 </Flex>
             </Box>
+            <Box px={3}>
             <Introduction
             isActive={ activeJobs.find((item) => item.id === jobName)?.isActive || false}
             start={StartJob}
@@ -66,6 +69,8 @@ const Root = ({jobName, index, quantity, name, description}:IRoot) => {
             strategy={ activeJobs.find((item) => item.id === jobName)?.strategy || 'default'}
             change={ChangeStrategy}
             />
+            </Box>
+            </Flex>
             <Box position='relative' overflow>
             <Box position='absolute' left='0' top='0'
             
@@ -78,7 +83,8 @@ const Root = ({jobName, index, quantity, name, description}:IRoot) => {
             />
          
              </Box>
-            </Flex>
+             </Flex>
+            
         </Box>
     )
 }

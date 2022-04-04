@@ -292,6 +292,7 @@ export const globalStyles = globalCss({
         boxSizing: 'border-box'
     },
     "*": {
+        color:'$textForeground',
         margin: 0,
         padding: 0,
         fontSize: "16px",

@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mdx-js/loader": "^2.1.1",
+    "@mdx-js/react": "^2.1.1",
+    "@next/mdx": "^12.1.4",
     "@radix-ui/react-accessible-icon": "^0.1.4",
     "@radix-ui/react-dialog": "^0.1.7",
     "@radix-ui/react-portal": "^0.1.4",

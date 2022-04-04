@@ -52,7 +52,7 @@ const Terminal = () => {
 
     return(
             <MotionBox
-            initial={{y:0, x: '-50%', opacity: 0}}
+            initial={{y:0, x: '-50%', left:'50%', opacity: 0}}
             animate={controls}
             width={{'@initial':'24', '@bp1':'full'}}
             position='fixed'
@@ -123,7 +123,9 @@ const Terminal = () => {
                     pt='2'
                     maxHeight={'16'}
                     //ts-ignore-next-line
-                    height='full' css={{overflow:'scroll'}}>
+                    height='full' 
+                     //ts-ignore-next-line
+                    css={{overflow:'scroll'}}>
                         <Flex direction='column' gap='2'>
                             {value.length === 0 && (
                                   <Paragraph size={'7'}  css={{pb:'$2'}}color='textForeground'>

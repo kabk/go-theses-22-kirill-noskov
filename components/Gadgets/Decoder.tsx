@@ -1,5 +1,5 @@
 import valueToLetter from 'src/valueToLetter'
-import { Box, Bleed, Text, Flex } from '@/design-system/primitives'
+import { Box, Text, Flex } from '@/design-system/primitives'
 import Body from '@/design-system/Body'
 import type {Job} from 'contexts'
 import {useRef, useEffect, useState} from 'react'
@@ -50,8 +50,9 @@ const Decoder = ({value}:IDecoder) => {
     },[])
 
     return (
-        <Bleed type='default' adjust>
+        // <Bleed type='default' adjust>
             <Box position={'relative'}
+           
              overflow={true}>
                 <Box overflow={true} css={{ position: 'relative', zIndex: 10 }}>
                     <Body>
@@ -115,7 +116,7 @@ const Decoder = ({value}:IDecoder) => {
                 </Box>
 
             </Box>
-        </Bleed>
+        // </Bleed>
     )
 }
 
