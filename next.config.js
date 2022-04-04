@@ -1,6 +1,8 @@
 // const withTM = require('next-transpile-modules')(['three'])
 
 // /** @type {import('next').NextConfig} */
+const debug = process.env.NODE_ENV !== "production";
+
 
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
@@ -15,6 +17,7 @@ module.exports = withMDX({
   typescript:{
     ignoreBuildErrors: true,
   },
+  assetPrefix: !debug ? 'https://noskovvkirill.github.io/thesisweb/' : '',
   // Append the default value with md extensions
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 })
